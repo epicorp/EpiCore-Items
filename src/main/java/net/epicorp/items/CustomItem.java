@@ -1,14 +1,21 @@
 package net.epicorp.items;
 
 import de.tr7zw.changeme.nbtapi.NBTItem;
+import net.epicorp.utilities.objects.InstanceListener;
 import org.bukkit.NamespacedKey;
+import org.bukkit.event.Event;
+import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
+import java.util.function.Function;
 
-public abstract class CustomItem {
+public abstract class CustomItem implements Listener {
 	protected final NamespacedKey id;
 
-	public CustomItem(NamespacedKey id) {
-		this.id = id;
+	public CustomItem(Plugin plugin, String id, Function<Event, ItemStack> converter) {
+		this.id = new NamespacedKey(plugin, id);
+		if(converter != null)
+			InstanceListener.register(this, plugin, ItemEventHandler.class, converter, this::verify, ItemEventHandler::ignoreCancelled, ItemEventHandler::priority);
 	}
 
 	/**
