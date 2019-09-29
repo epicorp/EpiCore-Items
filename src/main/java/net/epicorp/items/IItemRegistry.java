@@ -1,6 +1,7 @@
 package net.epicorp.items;
 
 import org.bukkit.NamespacedKey;
+import java.util.function.BiConsumer;
 
 public interface IItemRegistry {
 	/**
@@ -23,6 +24,10 @@ public interface IItemRegistry {
 	 */
 	default CustomItem getItem(String name) {
 		int split = name.indexOf(':');
+		if(split == -1)
+			return null;
 		return getItem(new NamespacedKey(name.substring(0, split), name.substring(split+1, name.length())));
 	}
+
+	void forEach(BiConsumer<? super NamespacedKey, ? super CustomItem> action);
 }

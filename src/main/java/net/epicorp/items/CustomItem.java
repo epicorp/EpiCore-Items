@@ -1,6 +1,6 @@
 package net.epicorp.items;
 
-import de.tr7zw.changeme.nbtapi.NBTItem;
+import de.tr7zw.nbtapi.NBTItem;
 import net.epicorp.utilities.objects.InstanceListener;
 import org.bukkit.NamespacedKey;
 import org.bukkit.event.Event;
@@ -34,7 +34,7 @@ public abstract class CustomItem implements Listener {
 		return stack.getItem();
 	}
 
-	protected final String getId() {
+	public final String getId() {
 		return id.toString();
 	}
 
@@ -44,8 +44,14 @@ public abstract class CustomItem implements Listener {
 	 * @return
 	 */
 	public boolean verify(ItemStack istack) {
+		if(istack == null) return false;
 		NBTItem stack = new NBTItem(istack);
 		String string = stack.getString("net.epicorp.items");
 		return getId().equalsIgnoreCase(string);
+	}
+
+	@Override
+	public String toString() {
+		return getId();
 	}
 }

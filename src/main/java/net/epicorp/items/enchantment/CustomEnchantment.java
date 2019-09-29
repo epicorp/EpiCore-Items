@@ -1,7 +1,7 @@
 package net.epicorp.items.enchantment;
 
-import de.tr7zw.changeme.nbtapi.NBTCompound;
-import de.tr7zw.changeme.nbtapi.NBTItem;
+import de.tr7zw.nbtapi.NBTCompound;
+import de.tr7zw.nbtapi.NBTItem;
 import net.epicorp.utilities.objects.InstanceListener;
 import org.bukkit.NamespacedKey;
 import org.bukkit.event.Event;
@@ -27,6 +27,7 @@ public abstract class CustomEnchantment implements Listener {
 	 * @return
 	 */
 	public boolean verify(ItemStack stack) {
+		if(stack == null) return false;
 		NBTItem item = new NBTItem(stack);
 		NBTCompound compound = item.getCompound("epicore.enchantments");
 		return compound != null && compound.hasKey(idString);

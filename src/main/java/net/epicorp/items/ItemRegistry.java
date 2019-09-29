@@ -3,6 +3,7 @@ package net.epicorp.items;
 import org.bukkit.NamespacedKey;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.BiConsumer;
 
 public class ItemRegistry implements IItemRegistry {
 	protected Map<NamespacedKey, CustomItem> customItemMap = new HashMap<>();
@@ -16,4 +17,6 @@ public class ItemRegistry implements IItemRegistry {
 	public CustomItem getItem(NamespacedKey id) {
 		return customItemMap.get(id);
 	}
+
+	public void forEach(BiConsumer<? super NamespacedKey, ? super CustomItem> action) {customItemMap.forEach(action);}
 }
