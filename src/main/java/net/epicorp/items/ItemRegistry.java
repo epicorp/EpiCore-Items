@@ -10,13 +10,14 @@ public class ItemRegistry implements IItemRegistry {
 
 	@Override
 	public void register(CustomItem item) {
-		customItemMap.put(item.id, item);
+		this.customItemMap.put(item.id, item);
 	}
 
 	@Override
 	public CustomItem getItem(NamespacedKey id) {
-		return customItemMap.get(id);
+		return this.customItemMap.get(id);
 	}
 
-	public void forEach(BiConsumer<? super NamespacedKey, ? super CustomItem> action) {customItemMap.forEach(action);}
+	@Override
+	public void forEach(BiConsumer<? super NamespacedKey, ? super CustomItem> action) {this.customItemMap.forEach(action);}
 }

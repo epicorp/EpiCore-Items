@@ -10,16 +10,16 @@ public class EnchantmentRegistry implements IEnchantmentRegistry {
 
 	@Override
 	public void register(CustomEnchantment item) {
-		enchants.put(item.id, item);
+		this.enchants.put(item.id, item);
 	}
 
 	@Override
 	public CustomEnchantment getEnchantment(NamespacedKey id) {
-		return enchants.get(id);
+		return this.enchants.get(id);
 	}
 
 	@Override
 	public void forEach(BiConsumer<NamespacedKey, CustomEnchantment> consumer) {
-		enchants.forEach(consumer);
+		this.enchants.forEach(consumer);
 	}
 }

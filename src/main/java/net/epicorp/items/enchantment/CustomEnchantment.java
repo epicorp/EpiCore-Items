@@ -23,7 +23,7 @@ public abstract class CustomEnchantment implements Listener {
 		this.id = new NamespacedKey(plugin, id);
 		this.idString = this.id.toString();
 		if (converter != null)
-			InstanceListener.register(this, plugin, EnchantmentEventHandler.class, (e) -> getLevel(converter.apply(e)), Objects::nonNull, EnchantmentEventHandler::ignoreCancelled, EnchantmentEventHandler::priority);
+			InstanceListener.register(this, plugin, EnchantmentEventHandler.class, (e) -> this.getLevel(converter.apply(e)), Objects::nonNull, EnchantmentEventHandler::ignoreCancelled, EnchantmentEventHandler::priority);
 	}
 
 	/**
@@ -36,7 +36,7 @@ public abstract class CustomEnchantment implements Listener {
 		if (stack == null) return false;
 		NBTItem item = new NBTItem(stack);
 		NBTCompound compound = item.getCompound(ENCHANTMENT_NBT);
-		return compound != null && compound.hasKey(idString);
+		return compound != null && compound.hasKey(this.idString);
 	}
 
 	/**
@@ -48,12 +48,12 @@ public abstract class CustomEnchantment implements Listener {
 	public Integer getLevel(ItemStack stack) {
 		NBTItem item = new NBTItem(stack);
 		NBTCompound compound = item.getCompound(ENCHANTMENT_NBT);
-		if (compound != null && compound.hasKey(idString)) return compound.getInteger(idString);
+		if (compound != null && compound.hasKey(this.idString)) return compound.getInteger(this.idString);
 		else return null;
 	}
 
 	public NamespacedKey getId() {
-		return id;
+		return this.id;
 	}
 
 	public ItemStack enchant(ItemStack item, int level) {
@@ -62,8 +62,8 @@ public abstract class CustomEnchantment implements Listener {
 		if (!nbt.hasKey(ENCHANTMENT_NBT)) compound = nbt.addCompound(ENCHANTMENT_NBT);
 		else compound = nbt.getCompound(ENCHANTMENT_NBT);
 
-		if (!compound.hasKey(idString)) compound.setInteger(idString, level);
-		else compound.setInteger(idString, compound.getInteger(idString) + level);
+		if (!compound.hasKey(this.idString)) compound.setInteger(this.idString, level);
+		else compound.setInteger(this.idString, compound.getInteger(this.idString) + level);
 		return nbt.getItem();
 	}
 

@@ -26,7 +26,7 @@ public interface IItemRegistry {
 		int split = name.indexOf(':');
 		if(split == -1)
 			return null;
-		return getItem(new NamespacedKey(name.substring(0, split), name.substring(split+1, name.length())));
+		return this.getItem(new NamespacedKey(name.substring(0, split), name.substring(split+1)));
 	}
 
 	void forEach(BiConsumer<? super NamespacedKey, ? super CustomItem> action);

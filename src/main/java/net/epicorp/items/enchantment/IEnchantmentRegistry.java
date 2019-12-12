@@ -24,7 +24,7 @@ public interface IEnchantmentRegistry {
 	 */
 	default CustomEnchantment getEnchantment(String name) {
 		int split = name.indexOf(':');
-		return getEnchantment(new NamespacedKey(name.substring(0, split), name.substring(split+1)));
+		return this.getEnchantment(new NamespacedKey(name.substring(0, split), name.substring(split+1)));
 	}
 
 	void forEach(BiConsumer<NamespacedKey, CustomEnchantment> consumer);

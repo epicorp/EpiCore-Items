@@ -1,3 +1,2 @@
-rootProject.name = 'EpiCore-Items'
-include 'SpigoTech'
-
+rootProject.name = 'EpiCore-1.14'
+include 'EpiCore-Utilities'
